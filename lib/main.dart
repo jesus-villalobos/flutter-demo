@@ -9,7 +9,7 @@ class GlobeSistersDemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
-      home: Home(), 
+      home: HomePage(), 
       title: "GlobeSisters Demo Application",
       theme: CupertinoThemeData(brightness: Brightness.light),
     );

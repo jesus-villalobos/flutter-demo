@@ -28,33 +28,34 @@ class _HomePage extends State<HomePage> {
         middle: Text('GlobeSisters Flutter Sample'),
       ),
       child: CupertinoTabScaffold(
-          tabBar: CupertinoTabBar(
-            backgroundColor: Colors.blueGrey,
-            activeColor: Colors.white,
-            inactiveColor: Colors.grey,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.bars),
-                label: "Feed",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.add_circled),
-                label: "Posts",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.person),
-                label: "Profile",
-              )
-            ],
-          ),
-          tabBuilder: (context, index) {
-            return CupertinoTabView(
-              builder: (context) {
-                return data[index];
-              },
-            );
-          },
-        )
+        tabBar: CupertinoTabBar(
+          height: 60.0,
+          backgroundColor: Colors.white,
+          activeColor: Colors.black,
+          inactiveColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.bars),
+              label: "Feed",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.add_circled),
+              label: "Posts",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person),
+              label: "Profile",
+            )
+          ],
+        ),
+        tabBuilder: (context, index) {
+          return CupertinoTabView(
+            builder: (context) {
+              return data[index];
+            },
+          );
+        },
+      )
     );
   }
 }
