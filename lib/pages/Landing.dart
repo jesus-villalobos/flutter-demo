@@ -1,20 +1,20 @@
 import "package:flutter/cupertino.dart";
 
-class Profile extends StatelessWidget {
-  const Profile({super.key});
+class Landing extends StatelessWidget {
+  const Landing({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Profile'),
+        middle: Text('GlobeSisters Sample App'),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Center(
-              child: Text('pages :)'),
+              child: Text('Click Below to Navigate!'),
             ),
           ]
         )

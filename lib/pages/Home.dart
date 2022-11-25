@@ -1,32 +1,29 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-// import "../components/AppFooter.dart";
 
 import "./Feed.dart";
 import "./Posts.dart";
 import "./Profile.dart";
+import "./Landing.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePage createState() {
-    return _HomePage();
-  }
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePage extends State<HomePage> {
+class HomePageState extends State<HomePage> {
 
-  List<Widget> data = [const Feed(), const Posts(), const Profile()];
+  bool firstLanding = true;
+  List<Widget> data = [Feed(), const Posts(), const Profile()];
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      // Uncomment to change the background color
-      // backgroundColor: Color.fromARGB(255, 255, 212, 254),
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('GlobeSisters Flutter Sample'),
-      ),
+      // navigationBar: const CupertinoNavigationBar(
+      //   middle: Text('GlobeSisters Flutter Sample'),
+      // ),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           height: 60.0,

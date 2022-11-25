@@ -5,8 +5,10 @@ class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Posts'),
+      ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
