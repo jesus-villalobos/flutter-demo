@@ -14,7 +14,7 @@ class Profile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Center(
-              child: Text('pages :)'),
+              child: Text('There will be a profile here ... eventually 🏃🏽‍♂️'),
             ),
           ]
         )

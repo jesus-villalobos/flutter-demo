@@ -178,7 +178,7 @@ class PostsState extends State<Posts> {
                           posts.insert(0, {
                             "title": newPostTitle, 
                             "caption": newPostCaption, 
-                            "dateTime": "${now.month.toString()}/${now.day.toString()}/${now.year.toString()}, ${now.hour.toString()}:${now.minute.toString()}"
+                            "dateTime": "${now.month.toString()}/${now.day.toString()}/${now.year.toString()}, ${now.hour.toString()}:${now.minute.toString().padLeft(2)}"
                           });
                         });
                       }
@@ -203,7 +203,7 @@ class PostsState extends State<Posts> {
         child: Scaffold(
           body: Column(
             children: [
-              Container(
+              SingleChildScrollView(
                 child: newPostInputForm(),
               ),
               Expanded(
