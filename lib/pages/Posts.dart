@@ -1,7 +1,6 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 
-
 class Posts extends StatefulWidget {
   const Posts({Key? key}) : super(key: key);
 
@@ -129,7 +128,7 @@ class PostsState extends State<Posts> {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                          return 'Please enter a title';
                         }
                         return null;
                       },
@@ -155,7 +154,7 @@ class PostsState extends State<Posts> {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                          return 'Please enter a caption';
                         }
                         return null;
                       },
