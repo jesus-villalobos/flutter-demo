@@ -30,8 +30,7 @@ class FeedState extends State<Feed> {
   }
 
   Widget createImageList() {
-    // generateNewData();
-    
+        
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
       itemBuilder: (context, index) {
