@@ -13,50 +13,51 @@ class Feed extends StatefulWidget {
 
 class FeedState extends State<Feed> {
 
-  var randomNumbers = List.generate(10, (_) => Random().nextInt(10000), growable: true);
-  var randomFirstNames = List.generate(10, (_) => faker.person.firstName(), growable: true);
-  var randomLastNames = List.generate(10, (_) => faker.person.lastName(), growable: true);
-  var randomCaptions = List.generate(10, (_) => faker.lorem.sentence(), growable: true);
+  Map<String, dynamic> firstNames = {"list": List.empty(growable: true), "generator": faker.person.firstName},
+                        lastNames = {"list": List.empty(growable: true), "generator": faker.person.lastName},
+                         captions = {"list": List.empty(growable: true), "generator": faker.lorem.sentence};
 
-  updateRandomParts() {
-    randomNumbers.addAll(List.generate(10, (_) => Random().nextInt(10000)));
-    randomFirstNames.addAll(List.generate(10, (_) => faker.person.firstName(), growable: true));
-    randomLastNames.addAll(List.generate(10, (_) => faker.person.lastName(), growable: true));
-    randomCaptions.addAll(List.generate(10, (_) => faker.lorem.sentence(), growable: true));
+  @override
+  void initState() {
+    super.initState();
+    generateNewData();
+  }
+
+  generateNewData() {
+    for (Map<String, dynamic> dataObject in [firstNames, lastNames, captions]) {
+      dataObject["list"].addAll(List.generate(10, (_) => dataObject["generator"]()));
+    }
   }
 
   Widget createImageList() {
+    // generateNewData();
+    
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
       itemBuilder: (context, index) {
-        if (index.isOdd) {
-          return const Divider(
-            height: 20.0, 
-            thickness: 3.0, 
-            color: Colors.white,
-          );
-        }
+        if (index.isOdd) return const Divider(height: 20.0, thickness: 8.0, color: Colors.white,);
 
-        final idx = index ~/ 2;
+        if (index ~/ 2 >= firstNames.length) generateNewData();
 
-        if (idx >= randomNumbers.length) {
-          updateRandomParts();
-        }
+        final String firstName = firstNames["list"][index],
+                      lastName = lastNames["list"][index],
+                       caption = captions["list"][index];
+        
+        final NetworkImage image = NetworkImage("https://source.unsplash.com/random/$index");
+        precacheImage(image, context);
 
-        return createImageCard(idx);
+        return createImageCard(
+          "$firstName $lastName",
+          "${firstName.toLowerCase()}-${lastName.toLowerCase()}",
+          "${firstName.toLowerCase()}-${lastName.toLowerCase()}@sampleapp.com",
+          caption,
+          image
+        );
       },
     );
   }
 
-  Widget createImageCard(int index) {
-
-    final String firstName = randomFirstNames[index];
-    final String lastName = randomLastNames[index];
-    final String caption = randomCaptions[index];
-
-    final String fullName = "${firstName} ${lastName}";
-    final String userName = "${firstName.toLowerCase()}-${lastName.toLowerCase()}";
-    final String email = "${userName}@sampleapp.com";
+  Widget createImageCard(String fullName, String userName, String email, String caption, NetworkImage image) {
 
     return CupertinoButton(
       child: Column(
@@ -67,7 +68,7 @@ class FeedState extends State<Feed> {
               width: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage("https://source.unsplash.com/random/$index"),
+                  image: image,
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(12),
