@@ -1,8 +1,9 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "dart:math";
 
 import "package:faker/faker.dart";
+
+import '../components/FeedCardWidget.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -15,7 +16,11 @@ class FeedState extends State<Feed> {
 
   Map<String, dynamic> firstNames = {"list": List.empty(growable: true), "generator": faker.person.firstName},
                         lastNames = {"list": List.empty(growable: true), "generator": faker.person.lastName},
-                         captions = {"list": List.empty(growable: true), "generator": faker.lorem.sentence};
+                         captions = {"list": List.empty(growable: true), "generator": faker.lorem.sentence},
+                           cities = {"list": List.empty(growable: true), "generator": faker.address.city},
+                           states = {"list": List.empty(growable: true), "generator": faker.address.state},
+                     phoneNumbers = {"list": List.empty(growable: true), "generator": faker.phoneNumber.us},
+                        companies = {"list": List.empty(growable: true), "generator": faker.company.name};
 
   @override
   void initState() {
@@ -24,7 +29,7 @@ class FeedState extends State<Feed> {
   }
 
   generateNewData() {
-    for (Map<String, dynamic> dataObject in [firstNames, lastNames, captions]) {
+    for (Map<String, dynamic> dataObject in [firstNames, lastNames, captions, cities, states, phoneNumbers, companies]) {
       dataObject["list"].addAll(List.generate(10, (_) => dataObject["generator"]()));
     }
   }
@@ -40,83 +45,21 @@ class FeedState extends State<Feed> {
 
         final String firstName = firstNames["list"][index],
                       lastName = lastNames["list"][index],
-                       caption = captions["list"][index];
+                          city = cities["list"][index],
+                         state = states["list"][index];
         
-        final NetworkImage image = NetworkImage("https://source.unsplash.com/random/$index");
+        // final NetworkImage image = NetworkImage("https://source.unsplash.com/random/$index");
+        const NetworkImage image = NetworkImage("https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg");
         precacheImage(image, context);
 
-        return createImageCard(
-          "$firstName $lastName",
-          "${firstName.toLowerCase()}-${lastName.toLowerCase()}",
-          "${firstName.toLowerCase()}-${lastName.toLowerCase()}@sampleapp.com",
-          caption,
-          image
-        );
-      },
-    );
-  }
-
-  Widget createImageCard(String fullName, String userName, String email, String caption, NetworkImage image) {
-
-    return CupertinoButton(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: 400,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: image,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            Container( 
-              padding: const EdgeInsets.all(10.0),
-              child: Align( 
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  fullName,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
-              )
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
-              child: Align( 
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  caption,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400
-                  ),
-                ),
-              )
-            ),
-          ]
-        ),
-      onPressed: () {
-        showCupertinoDialog(
-          context: context,
-          builder: (BuildContext context) => CupertinoAlertDialog(
-            title: const Text('Card is clicked.'),
-            actions: <Widget>[
-              CupertinoDialogAction(
-                child: const Text('ok'),
-                onPressed: () {
-                  Navigator.pop(context, 'ok');
-                },
-              ),
-            ],
-          ),
+        return FeedCardWidget(
+          fullName: "$firstName $lastName",
+          userName: "${firstName.toLowerCase()}-${lastName.toLowerCase()}",
+          location: "$city, $state",
+          caption: captions["list"][index],
+          phoneNumber: phoneNumbers["list"][index],
+          company: companies["list"][index],
+          image: image
         );
       },
     );
