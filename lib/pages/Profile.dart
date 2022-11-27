@@ -17,7 +17,7 @@ class Profile extends StatelessWidget {
         location: "Richmond, California",
         phoneNumber: "(111) 222-333",
         company: "UC Berkeley",
-        image: NetworkImage("https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg"),
+        image: NetworkImage("https://media-exp1.licdn.com/dms/image/C5603AQGtpTGXvoSomA/profile-displayphoto-shrink_800_800/0/1630608547049?e=2147483647&v=beta&t=p_DKxbSrPfdZBOSMtiExXQzSYu9PX3_btia0UgqCi6k"),
       ),
     );
   }
