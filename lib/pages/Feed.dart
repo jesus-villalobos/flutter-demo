@@ -1,5 +1,6 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "dart:math";
 
 import "package:faker/faker.dart";
 
@@ -50,7 +51,7 @@ class FeedState extends State<Feed> {
         
         // TODO: For some reason, the Unsplash server isn't responding, but PicSum works just the same.
         // final NetworkImage image = NetworkImage("https://source.unsplash.com/random/$index");
-        final NetworkImage image = NetworkImage("https://picsum.photos/seed/$index/1200/1200");
+        final NetworkImage image = NetworkImage("https://picsum.photos/seed/$firstName/1200/1200");
         precacheImage(image, context);
 
         return FeedCardWidget(
