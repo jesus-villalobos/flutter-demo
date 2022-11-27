@@ -4,7 +4,6 @@ import "package:flutter/material.dart";
 import "./Feed.dart";
 import "./Posts.dart";
 import "./Profile.dart";
-import "./Landing.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
