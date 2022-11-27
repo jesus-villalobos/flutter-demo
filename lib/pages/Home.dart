@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
 
   bool firstLanding = true;
-  List<Widget> data = [Feed(), const Posts(), const Profile()];
+  List<Widget> data = [const Feed(), const Posts(), const Profile()];
 
   @override
   Widget build(BuildContext context) {
